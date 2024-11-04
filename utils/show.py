@@ -9,13 +9,14 @@ from OCC.Core.TopLoc import TopLoc_Location
 from OCC.Core.BRepCheck import BRepCheck_Analyzer
 import argparse
 import sys
+
 sys.path.append("..")
 from cadlib.extrude import CADSequence
 from cadlib.visualize import vec2CADsolid, create_CAD
 
-
 parser = argparse.ArgumentParser()
-parser.add_argument('--src', type=str, required=True, help="source folder")
+parser.add_argument('--src', type=str, required=False, help="source folder",
+                    default='D:\\AI_SDK\\proj_log\\newDeepCAD\\lgan_1000\\results\\fake_z_ckpt200000_num9000_dec\\')
 parser.add_argument('--form', type=str, default="h5", choices=["h5", "json"], help="file format")
 parser.add_argument('--idx', type=int, default=0, help="show n files starting from idx.")
 parser.add_argument('--num', type=int, default=10, help="number of shapes to show. -1 shows all shapes.")
@@ -27,7 +28,7 @@ src_dir = args.src
 print(src_dir)
 out_paths = sorted(glob.glob(os.path.join(src_dir, "*.{}".format(args.form))))
 if args.num != -1:
-    out_paths = out_paths[args.idx:args.idx+args.num]
+    out_paths = out_paths[args.idx:args.idx + args.num]
 
 
 def translate_shape(shape, translate):
@@ -60,7 +61,7 @@ for path in out_paths:
     except Exception as e:
         print("load and create failed.")
         continue
-    
+
     if args.filter:
         analyzer = BRepCheck_Analyzer(out_shape)
         if not analyzer.IsValid():
@@ -77,5 +78,3 @@ for path in out_paths:
     cnt += 1
 
 start_display()
-
-

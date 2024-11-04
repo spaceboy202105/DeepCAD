@@ -17,9 +17,9 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--src', type=str, required=True, help="source folder")
 parser.add_argument('--form', type=str, default="h5", choices=["h5", "json"], help="file format")
 parser.add_argument('--idx', type=int, default=0, help="export n files starting from idx.")
-parser.add_argument('--num', type=int, default=10, help="number of shapes to export. -1 exports all shapes.")
+parser.add_argument('--num', type=int, default=-1, help="number of shapes to export. -1 exports all shapes.")
 parser.add_argument('--filter', action="store_true", help="use opencascade analyzer to filter invalid model")
-parser.add_argument('-o', '--outputs', type=str, default=None, help="save folder")
+parser.add_argument('-o', '--outputs', type=str, default='D:\\AI_SDK\\proj_log\\newDeepCAD\\lgan_1000\\results\\fake_z_ckpt200000_num9000_dec\\_step', help="save folder")
 args = parser.parse_args()
 
 src_dir = args.src
